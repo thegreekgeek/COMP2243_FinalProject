@@ -12,7 +12,7 @@ public class GreetingMachine extends JFrame {
         JTextField nameField = new JTextField(15);
         JLabel prompt2 = new JLabel("WHAT IS YOUR QUEST");
         JTextField questField = new JTextField(15);
-        JButton greetButton = new JButton("GREET ME");
+        JButton greetButton = new JButton("ATTEMPT TO CROSS BRIDGE");
 
         add(prompt);
         add(nameField);
@@ -25,7 +25,7 @@ public class GreetingMachine extends JFrame {
         greetButton.addActionListener( e-> {
             String name = nameField.getText();
             String quest = questField.getText();
-            JOptionPane.showMessageDialog(this, "HELLO, " + name + "! \n" + "Your quest to" + quest + " has been derailed!");
+            JOptionPane.showMessageDialog(this, "HELLO, " + name + "! \n" + "Your quest to " + quest + " has been derailed!");
         });
     }
 
