@@ -2,7 +2,17 @@ import javax.sound.sampled.*;
 
 public class TonePlayer {
 
-    public void play(Tone tone) throws LineUnavailableException {
+    public void playSequence(ToneSequence seq) {
+        try {
+            for (Tone t : seq.getTones()) {
+                playTone(t);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void playTone(Tone tone) throws LineUnavailableException {
         float sampleRate = 44100f;
         int samples = (int) ((tone.getDurationMs() * sampleRate) / 1000.0);
 
@@ -10,11 +20,12 @@ public class TonePlayer {
         byte[] buf = new byte[samples * 4];
 
         for (int i = 0; i < samples; i++) {
-            double angle =
-                (2.0 * Math.PI * i * tone.getFrequency()) / sampleRate;
-            short value = (short) (Math.sin(angle) *
-                32767 *
-                tone.getAmplitude());
+            double sample = 0.0;
+            for (double f : tone.getFrequencies()) {
+                sample += Math.sin((2.0 * Math.PI * f * i) / sampleRate);
+            }
+            sample /= tone.getFrequencies().length; // normalize amplitude
+            short value = (short) (sample * 32767 * tone.getAmplitude());
 
             // Little-endian
             buf[4 * i] = (byte) (value & 0xff); // Left LSB

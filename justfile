@@ -1,4 +1,6 @@
-build stem:
-    @echo "Building {{stem}}..."
-    @javac {{stem}}.java
-    @java {{stem}}
+set shell := ["powershell", "-Command"]
+[working-directory: 'src']
+build:
+    @echo "Building..."
+    @javac *.java
+    @java Main

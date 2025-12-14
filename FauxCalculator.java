@@ -1,11 +1,11 @@
-import javax.swing.*;
 import java.awt.*;
-
+import javax.swing.*;
 
 public class FauxCalculator extends JFrame {
+
     public FauxCalculator() {
         setTitle("Calcy");
-        setSize(300,400);
+        setSize(300, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -20,10 +20,22 @@ public class FauxCalculator extends JFrame {
 
         // Create buttons (for numbers and operators)
         String[] buttonLabels = {
-            "7", "8", "9", "/",
-            "4", "5", "6", "*",
-            "1", "2", "3", "-",
-            "0", ".", "=", "+"
+            "7",
+            "8",
+            "9",
+            "/",
+            "4",
+            "5",
+            "6",
+            "*",
+            "1",
+            "2",
+            "3",
+            "-",
+            "0",
+            ".",
+            "=",
+            "+",
         };
 
         for (String label : buttonLabels) {
@@ -32,6 +44,7 @@ public class FauxCalculator extends JFrame {
         add(displayPanel, BorderLayout.NORTH);
         add(numpadPanel, BorderLayout.CENTER);
     }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             FauxCalculator calc = new FauxCalculator();
