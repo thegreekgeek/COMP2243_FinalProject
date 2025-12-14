@@ -4,7 +4,7 @@ public class MFTone extends Tone {
     private final double frequency2;
 
     public MFTone(double frequency1, double frequency2, int durationMs) {
-        super(frequency1, durationMs, 1.0);
+        super(frequency1, durationMs, 0.55);
         this.frequency1 = frequency1;
         this.frequency2 = frequency2;
     }

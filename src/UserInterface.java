@@ -8,17 +8,17 @@ public class UserInterface extends JFrame {
 
     public UserInterface() {
         setTitle("BlueBox");
-        setSize(300, 400);
+        setSize(400, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         JPanel displayPanel = new JPanel();
-        displayPanel.setLayout(new FlowLayout());
+        displayPanel.setLayout(new BorderLayout());
 
-        display = new JTextField(20);
+        display = new JTextField();
         display.setHorizontalAlignment(JTextField.RIGHT);
         display.setEditable(false);
-        displayPanel.add(display);
+        displayPanel.add(display, BorderLayout.CENTER);
 
         JPanel numpadPanel = new JPanel();
         numpadPanel.setLayout(new GridLayout(4, 3));
@@ -45,9 +45,9 @@ public class UserInterface extends JFrame {
         }
 
         JPanel executionPanel = new JPanel();
-        executionPanel.setLayout(new GridLayout(1, 2));
+        executionPanel.setLayout(new GridLayout(2, 2));
 
-        String[] exebutton = { "EXECUTE", "Clear" };
+        String[] exebutton = { "K", "S", "2600", "EXECUTE", "Clear" };
 
         for (String label : exebutton) {
             JButton cmdbutton = new JButton(label);
@@ -74,6 +74,18 @@ public class UserInterface extends JFrame {
             display.setText("");
             seq = new ToneSequence();
             System.out.println("Display cleared");
+        } else if (label.equals("2600")) {
+            try {
+                Whistle tone = new Whistle(2600.0);
+                ToneSequence whistleSeq = tone.blow(100);
+                for (Tone t : whistleSeq.getTones()) {
+                    seq.add(t);
+                }
+                TonePlayer player = new TonePlayer();
+                player.playSequence(whistleSeq);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid digit: " + label);
+            }
         } else {
             display.setText(display.getText() + label);
             System.out.println(label + " was pressed");
