@@ -31,3 +31,8 @@ run-jar:
 
 # Build and run
 start: build jar run-jar
+
+# Export to zip file
+export:
+    @echo "Creating ZIP file..."
+    @git archive --format zip --output young-final-project.zip HEAD
