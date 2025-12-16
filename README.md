@@ -36,3 +36,8 @@ The main components are the Tone, ToneSequence, and TonePlayer classes, which es
 ### Frontend
 
 A sharp-eyed observer will note that there is a mismatch between the keypad implemented and the signals emitted, this is intentional. While the original blue boxes were designed to be used on POTS trunk systems, which used MF signalling, they were commonly made from salvaged telelphone parts, which commonly included a DTMF keypad. The keypad designed for this applicaiton was modelled after the original DTMF/Autovon keypad, which had 16 keys, which added priority signalling.
+
+
+## AI Disclaimer
+
+Some parts of this project were generated using AI tools, and AI tools were used in troubleshooting and diagnosis of code.
