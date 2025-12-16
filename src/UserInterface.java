@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.*;
 import javax.swing.*;
 
 public class UserInterface extends JFrame {
@@ -12,6 +13,16 @@ public class UserInterface extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        JTextArea logArea = new JTextArea();
+        System.setOut(new PrintStream(new TextAreaOutputStream(logArea)));
+        System.setErr(new PrintStream(new TextAreaOutputStream(logArea)));
+        logArea.setEditable(false);
+        logArea.setRows(4);
+
+        JScrollPane logScrollPane = new JScrollPane(logArea);
+        logScrollPane.setBorder(BorderFactory.createTitledBorder("Log"));
+        logScrollPane.setPreferredSize(new Dimension(Integer.MAX_VALUE, 120));
+
         JPanel displayPanel = new JPanel();
         displayPanel.setLayout(new BorderLayout());
 
@@ -21,21 +32,25 @@ public class UserInterface extends JFrame {
         displayPanel.add(display, BorderLayout.CENTER);
 
         JPanel numpadPanel = new JPanel();
-        numpadPanel.setLayout(new GridLayout(4, 3));
+        numpadPanel.setLayout(new GridLayout(4, 4));
 
         String[] buttonLabels = {
-            "7",
-            "8",
-            "9",
-            "4",
-            "5",
-            "6",
             "1",
             "2",
             "3",
+            "A",
+            "4",
+            "5",
+            "6",
+            "B",
+            "7",
+            "8",
+            "9",
+            "C",
             "*",
             "0",
             "#",
+            "D",
         };
 
         for (String label : buttonLabels) {
@@ -45,9 +60,9 @@ public class UserInterface extends JFrame {
         }
 
         JPanel executionPanel = new JPanel();
-        executionPanel.setLayout(new GridLayout(2, 2));
+        executionPanel.setLayout(new GridLayout(3, 1));
 
-        String[] exebutton = { "K", "S", "2600", "EXECUTE", "Clear" };
+        String[] exebutton = { "2600Hz", "DIAL", "Clear" };
 
         for (String label : exebutton) {
             JButton cmdbutton = new JButton(label);
@@ -57,44 +72,47 @@ public class UserInterface extends JFrame {
 
         add(displayPanel, BorderLayout.NORTH);
         add(numpadPanel, BorderLayout.CENTER);
-        add(executionPanel, BorderLayout.SOUTH);
+        add(executionPanel, BorderLayout.EAST);
+        add(logScrollPane, BorderLayout.SOUTH);
         setLocationRelativeTo(null); // Centers the window
     }
 
     private void onButtonPress(String label) {
-        if (label.equals("EXECUTE")) {
+        if (label.equals("DIAL")) {
             if (display.getText().isEmpty()) {
                 System.out.println("No input to execute");
                 return;
             }
-            System.out.println("EXECUTING:" + display.getText());
+            System.out.println("DIALING:" + display.getText());
             TonePlayer player = new TonePlayer();
             player.playSequence(seq);
         } else if (label.equals("Clear")) {
             display.setText("");
             seq = new ToneSequence();
             System.out.println("Display cleared");
-        } else if (label.equals("2600")) {
+        } else if (label.equals("2600Hz")) {
             try {
+                display.setText(display.getText() + ' ' + label + ' ');
                 Whistle tone = new Whistle(2600.0);
-                ToneSequence whistleSeq = tone.blow(100);
+                ToneSequence whistleSeq = tone.blow(2000);
                 for (Tone t : whistleSeq.getTones()) {
                     seq.add(t);
                 }
                 TonePlayer player = new TonePlayer();
                 player.playSequence(whistleSeq);
+                System.out.println("TIME 2 HACK");
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid digit: " + label);
             }
         } else {
-            display.setText(display.getText() + label);
+            display.setText(display.getText() + label + ' ');
             System.out.println(label + " was pressed");
 
             // Generate MF tone for the digit
             try {
-                MFTone mfTone = MFTone.fromDigit(label.charAt(0), 100); // 100ms duration
+                MFTone MfTone = MFTone.fromDigit(label.charAt(0), 55);
                 ToneSequence toneSeq = new ToneSequence();
-                toneSeq.add(mfTone);
+                toneSeq.add(MfTone);
 
                 // Add to sequence for later playback
                 for (Tone t : toneSeq.getTones()) {
@@ -106,14 +124,6 @@ public class UserInterface extends JFrame {
                 player.playSequence(toneSeq);
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid digit: " + label);
-                // For non-MF characters like * and #, you might want to handle differently
-                Whistle tone = new Whistle(2600.0);
-                ToneSequence whistleSeq = tone.blow(100);
-                for (Tone t : whistleSeq.getTones()) {
-                    seq.add(t);
-                }
-                TonePlayer player = new TonePlayer();
-                player.playSequence(whistleSeq);
             }
         }
     }

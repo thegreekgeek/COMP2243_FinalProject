@@ -2,17 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToneSequence {
-    private final List<Tone> tones = new ArrayList<>();
+
+    private final List<Tone> TONES = new ArrayList<>();
 
     public void add(Tone t) {
-        tones.add(t);
+        TONES.add(t);
     }
 
     public List<Tone> getTones() {
-        return tones;
+        return TONES;
     }
 
     public int size() {
-        return tones.size();
+        return TONES.size();
     }
 }

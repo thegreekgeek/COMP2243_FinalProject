@@ -1,9 +1,9 @@
 public class Whistle {
 
-    private final double baseFrequency;
+    private final double BASE_FREQUENCY;
 
-    public Whistle(double baseFrequency) {
-        this.baseFrequency = baseFrequency;
+    public Whistle(double BASE_FREQUENCY) {
+        this.BASE_FREQUENCY = BASE_FREQUENCY;
     }
 
     private void addSweep(
@@ -28,16 +28,16 @@ public class Whistle {
     // Produce a simple one-tone sequence
     public ToneSequence blow(int durationMs) {
         ToneSequence seq = new ToneSequence();
-        seq.add(new Tone(baseFrequency, durationMs, 1.0));
+        seq.add(new Tone(BASE_FREQUENCY, durationMs, 1.0));
         return seq;
     }
 
     // More advanced pattern: break the whistle into bursts
     public ToneSequence chirpPattern() {
         ToneSequence seq = new ToneSequence();
-        seq.add(new Tone(baseFrequency, 100, 1.0));
-        seq.add(new Tone(baseFrequency, 100, 0.5));
-        seq.add(new Tone(baseFrequency, 200, 1.0));
+        seq.add(new Tone(BASE_FREQUENCY, 100, 1.0));
+        seq.add(new Tone(BASE_FREQUENCY, 100, 0.5));
+        seq.add(new Tone(BASE_FREQUENCY, 200, 1.0));
         seq.add(new Tone(2700.0, 200, 1.0));
         return seq;
     }

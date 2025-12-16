@@ -25,9 +25,12 @@ public class MFTone extends Tone {
             case '7' -> new MFTone(700, 1500, durationMs);
             case '8' -> new MFTone(900, 1500, durationMs);
             case '9' -> new MFTone(1100, 1500, durationMs);
-            case '0' -> new MFTone(1300, 1500, durationMs);
-            case 'K' -> new MFTone(1100, 1700, durationMs); // KP
-            case 'S' -> new MFTone(1500, 1700, durationMs); // ST
+            case '0' -> new MFTone(1300, 1500, durationMs); // digit 10
+            case 'A' -> new MFTone(700, 1700, durationMs); // ST3 (11)
+            case 'B' -> new MFTone(900, 1700, durationMs); // ST2 (12)
+            case '*' -> new MFTone(1100, 1700, durationMs); // KP
+            case 'C' -> new MFTone(1300, 1700, durationMs); // KP2
+            case '#' -> new MFTone(1500, 1700, durationMs); // ST
             default -> throw new IllegalArgumentException("Invalid MF digit");
         };
     }

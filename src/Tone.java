@@ -1,24 +1,24 @@
 public class Tone {
 
-    private final double frequency;
-    private final int durationMs;
-    private final double amplitude; // 0.0–1.0
+    private final double FREQUENCY;
+    private final int DURATION_MS;
+    private final double AMPLITUDE; // 0.0–1.0
 
-    public Tone(double frequency, int durationMs, double amplitude) {
-        this.frequency = frequency;
-        this.durationMs = durationMs;
-        this.amplitude = amplitude;
+    public Tone(double FREQUENCY, int DURATION_MS, double AMPLITUDE) {
+        this.FREQUENCY = FREQUENCY;
+        this.DURATION_MS = DURATION_MS;
+        this.AMPLITUDE = AMPLITUDE;
     }
 
     public double[] getFrequencies() {
-        return new double[] { frequency };
+        return new double[] { FREQUENCY };
     }
 
     public int getDurationMs() {
-        return durationMs;
+        return DURATION_MS;
     }
 
     public double getAmplitude() {
-        return amplitude;
+        return AMPLITUDE;
     }
 }
