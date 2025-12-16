@@ -97,6 +97,7 @@ public class UserInterface extends JFrame {
         } else if (label.equals("2600Hz")) {
             try {
                 display.setText(display.getText() + ' ' + label + ' ');
+                System.out.println("TIME 2 HACK");
                 Whistle tone = new Whistle(2600.0);
                 ToneSequence whistleSeq = tone.blow(2000);
                 for (Tone t : whistleSeq.getTones()) {
@@ -104,7 +105,6 @@ public class UserInterface extends JFrame {
                 }
                 TonePlayer player = new TonePlayer();
                 player.playSequence(whistleSeq);
-                System.out.println("TIME 2 HACK");
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid digit: " + label);
             }
