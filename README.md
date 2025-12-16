@@ -8,6 +8,7 @@ My final project is a blue box, which is an early phone hacking device designed 
 
 - MF Tone generator capable of storing and playing series of control signals to an audio device.
 - Logging output to keep a record of your current session.
+- Contains DTMFTone class for future expansion
 
 
 ## Usage
@@ -16,12 +17,14 @@ Upon launching the program, during normal usage you would dial a long-distance n
 
 ## Building from source
 
-If just is installed you can use the just file to either run the command ```just start``` and build and run the compiled JAR file, or you can run these commands from the source folder:
+If just is installed you can use the just file to either run the command ```just start``` to build and run the compiled JAR file, or you can run these commands from the source folder to compile and run the raw bytecode:
 
 ```powershell
 javac -d target/classes src/main/java/com/comp2243/bluebox/Main.java src/main/java/com/comp2243/bluebox/UserInterface.java src/main/java/com/comp2243/bluebox/ui/TextAreaOutputStream.java src/main/java/com/comp2243/bluebox/tone/*.java
 java -cp target/classes com.comp2243.bluebox.Main
 ```
+
+Additionally, an export function has been added to the justfile which will allow you to export the repository as a zip file.
 
 ## History
 
