@@ -1,3 +1,5 @@
+package com.comp2243.bluebox.tone;
+
 public class Tone {
 
     private final double FREQUENCY;

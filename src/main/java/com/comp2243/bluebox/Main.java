@@ -1,3 +1,5 @@
+package com.comp2243.bluebox;
+
 import javax.swing.*;
 
 public class Main {

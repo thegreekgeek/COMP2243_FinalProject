@@ -1,3 +1,5 @@
+package com.comp2243.bluebox.tone;
+
 public class MFTone extends Tone {
 
     private final double frequency1;

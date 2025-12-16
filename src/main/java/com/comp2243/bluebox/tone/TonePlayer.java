@@ -1,3 +1,5 @@
+package com.comp2243.bluebox.tone;
+
 import javax.sound.sampled.*;
 
 public class TonePlayer {

@@ -1,3 +1,7 @@
+package com.comp2243.bluebox;
+
+import com.comp2243.bluebox.tone.*;
+import com.comp2243.bluebox.ui.*;
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;

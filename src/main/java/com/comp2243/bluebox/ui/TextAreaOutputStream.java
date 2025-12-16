@@ -1,3 +1,5 @@
+package com.comp2243.bluebox.ui;
+
 import java.io.*;
 import javax.swing.*;
 
